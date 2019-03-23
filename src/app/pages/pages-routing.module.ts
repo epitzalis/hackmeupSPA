@@ -20,7 +20,7 @@ export const routes: Routes = [
     component: PrincipalComponent
   },
   {
-    path: 'products/:search',
+    path: 'products/:search/:order',
     component: ProductsComponent
   },
   {
