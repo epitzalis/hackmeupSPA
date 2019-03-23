@@ -25,10 +25,8 @@ export class MenuComponent implements OnInit, OnDestroy {
     }
   }
 
-  public changeImage() {
-    this.urlImage = this._image.nativeElement.files[0];
-    console.log(this._image.nativeElement.value);
-    
+  public changeImage(event: any) {
+    this.urlImage = event;
   }
 
 }
