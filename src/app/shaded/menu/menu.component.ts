@@ -6,11 +6,11 @@ declare const M;
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit, OnDestroy {
-
-
   @ViewChild('sidenav') private _sidenav: ElementRef;
+  @ViewChild('image') private _image: ElementRef;
 
   private _instanceSidenav;
+  public urlImage = '';
 
   constructor() { }
 
@@ -23,6 +23,12 @@ export class MenuComponent implements OnInit, OnDestroy {
     if (this._instanceSidenav) {
       this._instanceSidenav.close();
     }
+  }
+
+  public changeImage() {
+    this.urlImage = this._image.nativeElement.files[0];
+    console.log(this._image.nativeElement.value);
+    
   }
 
 }

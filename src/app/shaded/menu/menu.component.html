@@ -9,6 +9,21 @@
 
 <ul #sidenav id="slide-out" class="sidenav">
 <li style="margin-top: 20px"></li>
+<li>
+    <div *ngIf="urlImage === ''" class="file-field input-field">
+        <div class="btn">
+          <span>Imagen</span>
+          <input (change)="changeImage()" #image type="file" multiple>
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text" placeholder="Selecciona una imagen">
+        </div>
+      </div>
+      <div *ngIf="urlImage !== ''" class="file-field input-field">
+        <img [src]="urlImage" width="300px" height="300px">
+      </div>
+</li>
+
 <li><a [routerLink]="['/profile']">Profile</a></li>
 <li><a [routerLink]="['/products']">products</a></li>
 </ul>
