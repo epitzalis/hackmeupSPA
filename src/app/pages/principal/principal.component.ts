@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,10 +9,30 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 })
 export class PrincipalComponent implements OnInit {
 
-  constructor() { }
+  public txtSearch = '';
+
+  constructor(
+    private _router: Router
+  ) { }
 
   ngOnInit() {
 
+  }
+
+  public clearSearch(): void {
+    this.txtSearch = '';
+  }
+
+  public onSearchChange(search: string) {
+    this.txtSearch = search;
+  }
+
+  public goPrincipal() {
+    if (this.txtSearch.length >= 3) {
+      this._router.navigate(['/products', this.txtSearch]);
+    } else {
+      this._router.navigate(['/products', '']);
+    }
   }
 
 }
