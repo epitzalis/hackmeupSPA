@@ -27,6 +27,17 @@ export class ProductsComponent implements OnInit, OnDestroy {
     const search = this._activatedRoute.snapshot.paramMap.get('search');
     const order = this._activatedRoute.snapshot.paramMap.get('order');
 
+    this.getProducts(search, order);
+
+  }
+
+  ngOnDestroy(): void {
+    if (this._getProductsSubscription) {
+      this._getProductsSubscription.unsubscribe();
+    }
+  }
+
+  private getProducts(search: string, order: string) {
     this._getProductsSubscription = this._productsService.getProducts()
       .subscribe( (resp: ModelProduct[]) => {
         if (search === 'unfiltered') {
@@ -38,27 +49,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
             }
           });
         }
-        this.orderList(order);
+        if (order !== '') {
+          this.products = this._productsService.orderList(this.products, order);
+        }
     });
-
   }
 
-  ngOnDestroy(): void {
-    if (this._getProductsSubscription) {
-      this._getProductsSubscription.unsubscribe();
-    }
-  }
-
-  private orderList(order: string) {
-    if (order === '1') {
-      this.products = _.orderBy(this.products, ['title'], ['asc']);
-    } else if (order === '2') {
-      this.products = _.orderBy(this.products, ['title'], ['desc']);
-    } else if (order === '3') {
-      this.products = _.orderBy(this.products, ['price'], ['asc']);
-    } else if (order === '4') {
-      this.products = _.orderBy(this.products, ['price'], ['desc']);
-    }
-  }
 
 }

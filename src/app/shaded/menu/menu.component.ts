@@ -7,7 +7,6 @@ declare const M;
 })
 export class MenuComponent implements OnInit, OnDestroy {
   @ViewChild('sidenav') private _sidenav: ElementRef;
-  @ViewChild('image') private _image: ElementRef;
 
   private _instanceSidenav;
   public urlImage = '';
@@ -21,7 +20,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this._instanceSidenav) {
-      this._instanceSidenav.close();
+      this._instanceSidenav.destroy();
     }
   }
 
